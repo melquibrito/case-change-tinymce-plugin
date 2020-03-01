@@ -3,6 +3,8 @@
 To use this plugin copy the folder "case" and paste it into the "plugins" folder in tinymce directory.
 Here's the path for tinymce_5.2.0 self-hosted production release -> tinymce_5.2.0/tinymce/js/tinymce/plugins
 
+Download tinymce self-hosted releases [here](https://www.tiny.cloud/get-tiny/self-hosted/).
+
 Here's an example on how to add the dropdown case-change button to your tinymce WYSIWYG editor when initializing it:
 ```javascript
 tinymce.init(
