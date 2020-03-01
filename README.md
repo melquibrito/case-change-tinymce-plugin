@@ -5,7 +5,8 @@ Here's the path for tinymce_5.2.0 self-hosted production release -> tinymce_5.2.
 
 Download any of tinymce self-hosted releases [here](https://www.tiny.cloud/get-tiny/self-hosted/).
 
-Here's an example on how to add the dropdown case-change button to your tinymce WYSIWYG editor when initializing it:
+## Tutorial
+Add the dropdown case-change button to your _tinymce WYSIWYG editor_ by simply including **"case"** in your tinymce toolbar's configuration as well as in the plugins' configuration as demonstrated bellow:
 ```javascript
 tinymce.init(
 	{
@@ -15,9 +16,8 @@ tinymce.init(
 	}
 );
 ```
-Simply include "case" in your tinymce toolbar's configuration as well as in the plugins' configuration.
 
-If you're using tinymce remotely, you might be interested in trying this out instead:
+If you're using tinymce remotely in your application, then you might be interested in trying this out instead:
 ```javascript
 tinymce.init(
     {
