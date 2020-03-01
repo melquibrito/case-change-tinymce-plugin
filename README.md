@@ -1,4 +1,4 @@
-#Case-Change plugin for _Tinymce WYSIWYG Editor_
+# Case-Change plugin for _Tinymce WYSIWYG Editor_
 
 To use this plugin copy the folder "case" and paste it into the "plugins" folder in tinymce directory.
 Here's the path for tinymce_5.2.0 self-hosted production release -> tinymce_5.2.0/tinymce/js/tinymce/plugins
