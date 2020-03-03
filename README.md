@@ -33,7 +33,7 @@ tinymce.init(
                             text: 'lower case',
                             onAction: function () {
                                 var selectedText = editor.dom.decode(editor.selection.getContent());
-                                selectedText = selection.toLowerCase();
+                                selectedText = selectedText.toLowerCase();
                                 editor.selection.setContent(selectedText);
                                 editor.save();
                                 editor.isNotDirty = true;
