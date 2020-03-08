@@ -142,7 +142,7 @@ tinymce.init(
 			    if (next === first) break;
 			} while (next);
 			editor.save();
-			//editor.isNotDirty = true;
+			editor.isNotDirty = true;
 			editor.focus();
 			editor.selection.moveToBookmark(bm);
 		    }
