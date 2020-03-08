@@ -53,9 +53,7 @@ tinymce.init(
 		    }
 
 		    var titleCaseExceptions = getParameterArray();
-		    /*
-		     * Appending new functions to String.prototype...
-		     */
+		    
 		    String.prototype.toSentenceCase = function () {
 			return this.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, function (c) {
 			    return c.toUpperCase()
@@ -98,23 +96,6 @@ tinymce.init(
 			    return s.join('.');
 			};
 			return tt(this.toLowerCase());
-		    }
-
-		    /*
-		     * Helpers
-		     */
-		    const getDecodedSelection = function () {
-			return editor.dom.decode(editor.selection.getContent());
-		    }
-
-		    const perform = function (func) {
-			let content = func(),
-			    bookmark = editor.selection.getBookmark();
-			editor.selection.setContent(content);
-			editor.save();
-			editor.isNotDirty = true;
-			editor.focus();
-			editor.selection.moveToBookmark(bookmark);
 		    }
 
 		    String.prototype.apply = function (method) {
@@ -165,9 +146,7 @@ tinymce.init(
 			editor.focus();
 			editor.selection.moveToBookmark(bm);
 		    }
-		    /*
-		     * Element Builders 
-		     */
+
 		    const getMenuItems = function () {
 			return [
 			    {
@@ -217,23 +196,14 @@ tinymce.init(
 			}
 		    }
 
-		    /*
-		     * Creating tinymce elements so that they can be invoked in tinymce init function...
-		     */
 		    editor.ui.registry.addMenuButton('case', getMenuButton());
 		    editor.ui.registry.addNestedMenuItem('case', getNestedMenuItem());
 
-		    /*
-		     * Adding commands to tinymce...
-		     */
 		    editor.addCommand('mceLowerCase', () => apply(strings.LOWERCASE));
 		    editor.addCommand('mceUpperCase', () => apply(strings.UPPERCASE));
 		    editor.addCommand('mceSentenceCase', () => apply(strings.SENTENCECASE));
 		    editor.addCommand('mceTitleCase', () => apply(strings.TITLECASE));
 
-		    /*
-		     * Metadata returned so that tinymce help plugin can make use of it.
-		     */
 		    return {
 			getMetadata: function () {
 			    return {
