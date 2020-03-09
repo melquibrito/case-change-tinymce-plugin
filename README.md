@@ -53,7 +53,9 @@ tinymce.init(
 		    }
 
 		    var titleCaseExceptions = getParameterArray();
-		    
+		    /*
+		     * Appending new functions to String.prototype...
+		     */
 		    String.prototype.toSentenceCase = function () {
 			return this.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, function (c) {
 			    return c.toUpperCase()
@@ -113,34 +115,45 @@ tinymce.init(
 			}
 		    }
 
-		    const handler = function (f, l, node, rng, method) {
-			if (f && l) {
-			    node.textContent = node.textContent.slice(0, rng.startOffset) + node.textContent.slice(rng.startOffset, rng.endOffset).apply(method) + node.textContent.slice(rng.endOffset);
-			} else if (f && !l) {
-			    node.textContent = node.textContent.slice(0, rng.startOffset) + node.textContent.slice(rng.startOffset).apply(method);
-			} else if (!f && l) {
-			    node.textContent = node.textContent.slice(0, rng.endOffset).apply(method) + node.textContent.slice(rng.endOffset);
+		    const handler = function (node, method, r) {
+			console.log(r);
+			if (r.first && r.last) {
+			    node.textContent = node.textContent.slice(0, r.startOffset) + node.textContent.slice(r.startOffset, r.endOffset).apply(method) + node.textContent.slice(r.endOffset);
+			} else if (r.first && !r.last) {
+			    node.textContent = node.textContent.slice(0, r.startOffset) + node.textContent.slice(r.startOffset).apply(method);
+			} else if (!r.first && r.last) {
+			    node.textContent = node.textContent.slice(0, r.endOffset).apply(method) + node.textContent.slice(r.endOffset);
 			} else {
 			    node.textContent = node.textContent.apply(method);
 			}
 		    }
 
 		    const apply = function (method) {
-			let walker = new tinymce.dom.TreeWalker(editor.selection.getNode()),
-			    rng = editor.selection.getRng(),
-			    bm = editor.selection.getBookmark(2,true),
-			    current, next, first = walker.current();
+			let rng = editor.selection.getRng(),
+			    bm = editor.selection.getBookmark(2, true),
+			    walker = new tinymce.dom.TreeWalker(rng.startContainer),
+			    first = rng.startContainer, 
+			    last = rng.endContainer, 
+			    startOffset = rng.startOffset, 
+			    endOffset = rng.endOffset,
+			    current = walker.current();
 
 			console.log(rng);
 			do {
-			    current = walker.current();
 			    if (current.nodeName === '#text') {
-				let f = current === rng.startContainer, l = current === rng.endContainer;
-				handler(f, l, current, rng, method);
+				console.log(current);
+				handler(current, method, {
+				    first: current === first,
+				    last: current === last,
+				    startOffset: startOffset,
+				    endOffset: endOffset
+				});
 			    }
-			    next = walker.next();
-			    if (next === first) break;
-			} while (next);
+			    if(current === last) {
+				break;
+			    }
+			    current = walker.next();
+			} while (current);
 			editor.save();
 			editor.isNotDirty = true;
 			editor.focus();
