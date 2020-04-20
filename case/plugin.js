@@ -20,19 +20,36 @@
                 'but', 'off', 'out', 'via', 'bar', 'mid', 'per', 'pro', 'qua', 'til',
                 'from', 'into', 'unto', 'with', 'amid', 'anit', 'atop', 'down', 'less', 'like', 'near', 'over', 'past', 'plus', 'sans', 'save', 'than', 'thru', 'till', 'upon',
                 'for', 'and', 'nor', 'but', 'or', 'yet', 'so', 'an', 'a', 'some', 'the'
-            ], getParameterArray = function () {
-                let param = editor.getParam('title_case_excepions');
-                if (param) {
-                    if (Array.isArray(param)) {
-                        return param;
-                    } else if (typeof param === "string") {
-                        return param.replace(/(\s{1,})/g, "?").trim().split('?');
+            ], getParameterArray = function (param) {
+                let value = editor.getParam(param);
+                if (value) {
+                    if (Array.isArray(value)) {
+                        return value;
+                    } else if (typeof value === "string") {
+                        return value.replace(/(\s{1,})/g, "?").trim().split('?');
                     }
                 }
-                return defaultTitleCaseExeptions;
+                if (param === 'title_case_minors') {
+                    return defaultTitleCaseExeptions
+                }
+                return false
             }
 
-            var titleCaseExceptions = getParameterArray();
+            var titleCaseExceptions = getParameterArray('title_case_minors'),
+                toInclude = getParameterArray('include_to_title_case_minors'), 
+                toRuleOut = getParameterArray('rule_out_from_title_case_minors');
+            if (toInclude) {
+                toInclude.forEach((el) => {
+                    if(defaultTitleCaseExeptions.indexOf(el) === -1) {
+                        defaultTitleCaseExeptions.push(el)
+                    }
+                })
+            }
+            if (toRuleOut) {
+                toRuleOut.forEach((el) => {
+                    defaultTitleCaseExeptions = defaultTitleCaseExeptions.filter(minor => minor !== el)
+                })
+            }
             /*
              * Appending new functions to String.prototype...
              */
