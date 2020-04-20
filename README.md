@@ -26,7 +26,7 @@ tinymce.init({
     plugins: ["case"],
     title_case_minors: ["your", "customized", "set", "of", "minors", "here"]
     // You can also set it this way. Do it as you prefer.
-    // title_case_exceptions: "your customized set of minors here with a space in between them"
+    // title_case_minors: "your customized set of minors here with a space in between them"
 });
 ```
 To include minors to the default set, use _**inlcude_to_title_case_minors**_.
