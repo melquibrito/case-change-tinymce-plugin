@@ -42,3 +42,6 @@ tinymce.init({
     rule_out_from_title_case_minors: ["down", "into", "onto"] // These will now be title cased.
 });
 ```
+
+# License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
