@@ -1,4 +1,4 @@
-# Case-Change plugin for _Tinymce WYSIWYG Editor_
+# Case-Change plugin for [_Tinymce WYSIWYG Editor_](https://www.tiny.cloud/)
 
 ![preview](/Toolbar-menuButton-preview.png)
 
@@ -12,6 +12,7 @@ Download any of tinymce self-hosted releases [here](https://www.tiny.cloud/get-t
 Add the dropdown case-change button to your _tinymce WYSIWYG editor_ by simply including **"case"** in your tinymce toolbar's configuration as well as in the plugins' configuration as demonstrated bellow:
 ```javascript
 tinymce.init({
+    selector: "#target-element", // change this value according to your HTML target element selector
     toolbar: ["case"],
     plugins: ["case"],
 });
@@ -23,6 +24,7 @@ The following prepositions won't be title cased by default: _at_, _by_, _in_, _o
 To change the whole set of title case minors (to a different language, for instance), simply include _**title_case_minors**_ to your tinymce init configuration as demonstrated bellow:
 ```javascript
 tinymce.init({
+    selector: "#target-element", // change this value according to your HTML target element selector
     toolbar: ["case"],
     plugins: ["case"],
     title_case_minors: ["your", "customized", "set", "of", "minors", "here"]
@@ -36,12 +38,15 @@ To exclude any of the title minors, use _**rule_out_from_title_case_minors**_.
 In the example below we are including **who**, **whom**, and **that**, and excluding **down**, **into**, and **onto**.
 ```javascript
 tinymce.init({
+    selector: "#target-element", // change this value according to your HTML target element selector
     toolbar: ["case"],
     plugins: ["case"],
     inlcude_to_title_case_minors: ["who", "whom", "that"], // These won't be title cased anymore.
     rule_out_from_title_case_minors: ["down", "into", "onto"] // These will now be title cased.
 });
 ```
+## Author
+* [Melqui Brito](https://github.com/melquibrito)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for more details.
