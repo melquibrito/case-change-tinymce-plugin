@@ -1,4 +1,5 @@
-# Case-Change plugin for [_Tinymce WYSIWYG Editor_](https://www.tiny.cloud/)
+# Case Change 
+Free case-change plugin for [Tinymce WYSIWYG Editor](https://www.tiny.cloud/).
 
 ![preview](/Toolbar-menuButton-preview.png)
 
