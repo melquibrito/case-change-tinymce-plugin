@@ -5,7 +5,7 @@
  * @description Tinymce custom plugin for changing text case.
  */
 
- (function () {
+(function () {
     tinymce.PluginManager.add('case',
         function (editor) {
 
