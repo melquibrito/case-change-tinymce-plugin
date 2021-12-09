@@ -5,7 +5,7 @@
  * @description Tinymce custom plugin for changing text case.
  */
 
-(function () {
+ (function () {
     tinymce.PluginManager.add('case',
         function (editor) {
 
@@ -62,6 +62,9 @@
                 let tt = (str) => {
                     let s = str.split('.'), w;
                     for (let i in s) {
+                        if (!s.hasOwnProperty(i)) {
+                            continue;
+                        }
                         let w = s[i].split(' '),
                             j = 0;
 
@@ -113,7 +116,6 @@
             }
 
             const handler = function (node, method, r) {
-                console.log(r);
                 if (r.first && r.last) {
                     node.textContent = node.textContent.slice(0, r.startOffset) + node.textContent.slice(r.startOffset, r.endOffset).apply(method) + node.textContent.slice(r.endOffset);
                 } else if (r.first && !r.last) {
@@ -135,10 +137,8 @@
                     endOffset = rng.endOffset,
                     current = walker.current();
                     
-                console.log(rng);
                 do {
                     if (current.nodeName === '#text') {
-                        console.log(current);
                         handler(current, method, {
                             first: current === first,
                             last: current === last,
